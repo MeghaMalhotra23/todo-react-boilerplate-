@@ -20,6 +20,8 @@ import Paper from '@material-ui/core/Paper';
 import CheckBox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import {Link} from 'react-router-dom';
+
 /* eslint-disable react/prefer-stateless-function */
 const styles = theme=>({  
   root: {
@@ -75,10 +77,13 @@ export class HomePage extends React.PureComponent {
        <ListItemText primary={ele}/>
         </ListItem>
      })}
-          
-  
-      </List>
+         </List>
       </div>
+      <List>
+        <ListItem>
+        <Link to="/apicall">API </Link>
+        </ListItem>
+      </List>
       </Grid> 
     </div>
   
