@@ -13,7 +13,7 @@
 
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-
+import ApiCall from 'containers/ApiCall/Loadable';
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
@@ -22,6 +22,7 @@ export default function App() {
     <div>
       <Switch>
         <Route exact path="/" component={HomePage} />
+        <Route exact path="/apicall" component={ApiCall}/>
         <Route component={NotFoundPage} />
       </Switch>
     </div>

@@ -1,70 +1,46 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core';
-import messages from './messages';
-import Badge from '@material-ui/core/Badge';
-import MailIcon from '@material-ui/icons/Mail';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import TypoGraphy from '@material-ui/core/Typography';
+import {requestApiData, recieveApiData} from './action';
+import {makeSelectApi} from './selector';
+import { compose } from 'redux';
+import injectReducer from 'utils/injectReducer';
+import injectSaga from 'utils/injectSaga';
+import {connect} from 'react-redux';
+import {createStructuredSelector} from 'reselect';
+import reducer from './reducer';
 
-const styles = {
-  root: {
-    width: '100%',
-    maxWidth: 500,
-  },
-};
+const person=(x,i)=>(
+    <div key={x.userid}>
+    {x.userid}
+    </div>
+)
 export class ApiCall extends React.PureComponent{
     constructor(){
         super();
     }
+    componentDidMount(){
+        this.props.getData();
+    }
     render(){
-        const {classes,theme}=this.props;
+        //const {results=[]}=this.props.data.users;
         return(
-            <div className={classes.root}>
-        <Typography variant="display4" gutterBottom color="primary">
-          Display 4
-        </Typography>
-        <Typography variant="display3" color="secondary" gutterBottom>
-          Display 3
-        </Typography>
-        <Typography variant="display2" color="primary" gutterBottom>
-          Display 2
-        </Typography>
-        <Typography variant="display1" color="secondary" gutterBottom>
-          Display 1
-        </Typography>
-        <Typography variant="headline" color="primary" gutterBottom>
-          Headline
-        </Typography>
-        <Typography variant="title" color="secondary" gutterBottom>
-          Title
-        </Typography>
-        <Typography variant="subheading" color="primary" gutterBottom>
-          Subheading
-        </Typography>
-        <Typography variant="body2" color="secondary" gutterBottom>
-          Body 2
-        </Typography>
-        <Typography variant="body1" color="primary" gutterBottom align="right">
-          Body 1
-        </Typography>
-        <Typography
-          variant="caption"
-          color="secondary"
-          gutterBottom
-          align="center"
-        >
-          Caption
-        </Typography>
-        <Typography gutterBottom noWrap>
-          {`
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        `}
-        </Typography>
-        <Typography variant="button" gutterBottom>
-          Button
-        </Typography>
-      </div>
+        <div>
+            <TypoGraphy  variant="headline" color="primary" gutterBottom>
+            API call
+             </TypoGraphy>
+           
+        </div>
     );
   }}
-  export default withStyles(styles)(ApiCall);
+//   const mapStateToProps=createStructuredSelector({
+//       data:makeSelectApi()
+//   });
+
+  const mapDispatchToProps=(dispatch)=>{
+      return{
+      getData: ()=>dispatch(requestApiData)}};
+const withReducer=injectReducer({key:'api',reducer});
+const withConnect=connect(null,mapDispatchToProps);
+//const withSaga=injectSaga({key:'api',saga});
+  export default compose(withConnect,withReducer)(ApiCall);

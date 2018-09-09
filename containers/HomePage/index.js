@@ -1,13 +1,9 @@
 
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
 import PropTypes from 'prop-types';
-import injectSaga from 'utils/injectSaga';
 import Input from '@material-ui/core/Input'
 import addTask from './action';
-import saga from './saga';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import {connect} from 'react-redux';
@@ -25,18 +21,7 @@ import CheckBox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 /* eslint-disable react/prefer-stateless-function */
-const styles = theme=>({
-  layout: {
-    width: 'auto',
-    display: 'block', 
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
-    [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-      width: 400,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-    },
-  },
+const styles = theme=>({  
   root: {
     flexGrow: 1,
   },
@@ -72,7 +57,7 @@ export class HomePage extends React.PureComponent {
       </Typography>
       </Paper>      
         </Grid>
-        <Grid item xs={4} margin="normal" required fullWidth>
+        <Grid item xs={4} margin="normal" >
         <Paper className={classes.paper}>
       <Input placeholder="Enter task" id="task" type="text" ref={this.textInput} value={this.props.task} onChange={this.props.onChangeValue} />
       </Paper>
